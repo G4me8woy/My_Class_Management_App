@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1052373676588",
+    "firebase_url": "https://school-projects-77a60-default-rtdb.firebaseio.com",
+    "project_id": "school-projects-77a60",
+    "storage_bucket": "school-projects-77a60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052373676588:android:bdd415f1278a2c72209789",
+        "android_client_info": {
+          "package_name": "com.example.class_management_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052373676588-a1ge665cvq3sv31chlcv4t6ile7ga7gb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8NxI0Zy6sBFdmXhdCuxzOENJduuyWhoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052373676588-a1ge665cvq3sv31chlcv4t6ile7ga7gb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
