@@ -1,26 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-class Database {
-  Map data = {};
+class StudentDatabase {
+  Map<int, Map<String, dynamic>> allStudents = {};
 
-  Future<void> getFirebaseData() async {
-    try {
-      print("getting data from fire store");
+  final Future<QuerySnapshot> futureSnapshot = FirebaseFirestore.instance
+      .collection('students')
+      .doc('CPS')
+      .collection('100')
+      .doc('1A')
+      .collection('members')
+      .get();
 
-      await FirebaseFirestore.instance
-          .collection('students')
-          .get()
-          .then((value) => value.docs.asMap().forEach((key, value) {
-                data[key] = value[100];
-              }));
-      print("done getting data");
-    } catch (e) {
-      print("Error occured getting data from firebase");
-    }
-  }
-
-  Map getLocalDatabase() {
-    return data;
+  Future<QuerySnapshot> get future async {
+    return await futureSnapshot;
   }
 }

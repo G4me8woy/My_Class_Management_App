@@ -12,43 +12,56 @@ class Members extends StatelessWidget {
       .collection('members')
       .get();
 
-  List<DocumentSnapshot> stuList;
-  List stuSearchList;
-
-  void updateList(String input) {
-    if (input.length > 0) {
-      stuSearchList.clear();
-      stuList.map((stu) {
-        if (stu['name'].contains(input))
-          stuSearchList.add(stu);
-        else if (stu['id'].contains(input)) stuSearchList.add(stu);
-      });
-    }
-    if (input.length == 0) stuSearchList = stuList;
-  }
+  // void updateList(String input) {
+  //   if (input.length > 0) {
+  //     stuSearchList.clear();
+  //     stuList.map((stu) {
+  //       if (stu['name'].contains(input))
+  //         stuSearchList.add(stu);
+  //       else if (stu['id'].contains(input)) stuSearchList.add(stu);
+  //     });
+  //   }
+  //   if (input.length == 0) stuSearchList = stuList;
+  // }
 
   @override
   Widget build(BuildContext context) {
+    StudentDatabase db = StudentDatabase();
+
     return FutureBuilder<QuerySnapshot>(
-        future: futureSnapshot,
+        future: db.future,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.none)
+            //TODO: build no connection screen
             return Center(
               child: Text("No connection"),
             );
           if (snapshot.connectionState == ConnectionState.waiting)
+            //TODO: build waiting screen
             return Center(
               child: CircularProgressIndicator(),
             );
 
-          //getting document list
-          stuList = snapshot.data.docs;
-          stuSearchList = stuList;
+          // getting main student list
+          Map<int, Map<String, dynamic>> mainStudentsList = {};
+          int index = 0;
+          snapshot.data.docs.forEach((element) {
+            Map<String, dynamic> studentDetails = element.data();
+            db.allStudents[index] = studentDetails;
+            index++;
+          });
+
+          print(db.allStudents);
+          print(db.allStudents.length);
+
+          // return Center(
+          //   child: Text("Fuad"),
+          // );
 
           return RawScrollbar(
             thumbColor: Colors.black,
             child: ListView.builder(
-                itemCount: stuList.length,
+                itemCount: db.allStudents.length,
                 itemBuilder: (buildContext, index) {
                   return Container(
                     height: 100,
@@ -70,14 +83,14 @@ class Members extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "${stuSearchList[index]['name']}",
+                                "${db.allStudents[index]['name']}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
                               Text(
-                                "${stuSearchList[index]['id']}",
+                                "${db.allStudents[index]['id']}",
                                 style: TextStyle(color: Colors.white),
                               ),
                               // Row(
