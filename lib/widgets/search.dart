@@ -41,7 +41,8 @@ class _SearchState extends State<Search> {
           SvgPicture.asset(
             "assets/images/loupe.svg",
             height: 30,
-          )
+            color: Colors.white,
+          ),
         ],
       ),
     );

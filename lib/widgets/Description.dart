@@ -1,3 +1,4 @@
+import 'package:class_management_app/widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class Description extends StatelessWidget {
@@ -10,7 +11,7 @@ class Description extends StatelessWidget {
           border: Border(bottom: BorderSide(width: 1, color: Colors.grey))),
       height: 50,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             "all (1C)",
@@ -18,9 +19,34 @@ class Description extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          //sort button
         ],
       ),
     );
+  }
+}
+
+class seachfunctions extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    throw UnimplementedError();
   }
 }

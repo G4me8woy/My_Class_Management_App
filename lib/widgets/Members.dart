@@ -4,26 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Members extends StatelessWidget {
-  final Future futureSnapshot = FirebaseFirestore.instance
-      .collection('students')
-      .doc('CPS')
-      .collection('100')
-      .doc('1A')
-      .collection('members')
-      .get();
-
-  // void updateList(String input) {
-  //   if (input.length > 0) {
-  //     stuSearchList.clear();
-  //     stuList.map((stu) {
-  //       if (stu['name'].contains(input))
-  //         stuSearchList.add(stu);
-  //       else if (stu['id'].contains(input)) stuSearchList.add(stu);
-  //     });
-  //   }
-  //   if (input.length == 0) stuSearchList = stuList;
-  // }
-
   @override
   Widget build(BuildContext context) {
     StudentDatabase db = StudentDatabase();
@@ -42,21 +22,12 @@ class Members extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
 
-          // getting main student list
-          Map<int, Map<String, dynamic>> mainStudentsList = {};
           int index = 0;
           snapshot.data.docs.forEach((element) {
             Map<String, dynamic> studentDetails = element.data();
             db.allStudents[index] = studentDetails;
             index++;
           });
-
-          print(db.allStudents);
-          print(db.allStudents.length);
-
-          // return Center(
-          //   child: Text("Fuad"),
-          // );
 
           return RawScrollbar(
             thumbColor: Colors.black,
@@ -93,31 +64,6 @@ class Members extends StatelessWidget {
                                 "${db.allStudents[index]['id']}",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              // Row(
-                              //   children: [
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //     CircleAvatar(
-                              //         child: FlutterLogo(), radius: 10),
-                              //     SizedBox(width: 5),
-                              //   ],
-                              // )
                             ],
                           ),
                         )
