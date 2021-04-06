@@ -1,32 +1,56 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:class_management_app/model/database.dart';
+import 'package:flutter/material.dart';
 
-class ListManager {
-  ListManager();
+class ListManager extends StatelessWidget {
+  final List<Map<String, dynamic>> list;
 
-  CollectionReference collectionReference = FirebaseFirestore.instance
-      .collection('students')
-      .doc('CPS')
-      .collection('100')
-      .doc('1A')
-      .collection('members');
+  const ListManager({Key key, this.list}) : super(key: key);
 
-  QuerySnapshot querySnapshot;
-  // List<QueryDocumentSnapshot> allStudents;
-  List<Map<String, dynamic>> allStudents = [];
-  List<QueryDocumentSnapshot> searchResult;
-
-  Future<void> get setallStudentList async {
-    await collectionReference.get().then((value) => value.docs.map((doc) {
-          return doc.data();
-        }).forEach((data) {
-          print(data);
-          allStudents.add(data);
-        }));
-    print(allStudents);
-  }
-
-  List<Map<String, dynamic>> getallStudents() {
-    return allStudents;
+  @override
+  Widget build(BuildContext context) {
+    return RawScrollbar(
+      thumbColor: Colors.blue,
+      isAlwaysShown: true,
+      child: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (buildContext, index) {
+            return Container(
+              height: 100,
+              padding: EdgeInsets.only(left: 15),
+              margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    child: FlutterLogo(),
+                    radius: 40,
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${list[index]['name']}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
+                        Text(
+                          "${list[index]['id']}",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
+    );
   }
 }
