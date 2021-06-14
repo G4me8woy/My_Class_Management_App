@@ -8,6 +8,8 @@ class ListManager extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return RawScrollbar(
       thumbColor: Colors.blue,
       isAlwaysShown: true,
