@@ -3,7 +3,6 @@
 import 'package:class_management_app/model/ListManager.dart';
 import 'package:class_management_app/model/database.dart';
 import 'package:class_management_app/screens/AuthScreen.dart';
-import 'package:class_management_app/test/AuthScreenTest.dart';
 import 'package:class_management_app/widgets/myDrawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,7 +39,7 @@ void main() {
         }
         if (snapshot.connectionState == ConnectionState.done) {
           print("firebase_core initialized");
-          return AuthScreenTest();
+          return AuthScreen();
         }
         print("searching");
         return Center(child: CircularProgressIndicator());
